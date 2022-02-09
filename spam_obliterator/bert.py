@@ -1,22 +1,16 @@
-from rnn import read_csv_to_tf, shuffle_set, create_model
+from rnn import read_csv_to_tf, shuffle_set
 
 
 import tensorflow as tf
 import tensorflow_hub as hub
-import tensorflow_text as text
-
-tf.get_logger().setLevel("ERROR")
+import tensorflow_text
 
 train, test = read_csv_to_tf("data.csv")
 train = shuffle_set(train)
 test = shuffle_set(test)
 
-
 model_url = "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1"
 pre_url = "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-
-bert_preprocess_model = hub.KerasLayer(pre_url)
-bert_model = hub.KerasLayer(model_url)
 
 
 def build_model():
